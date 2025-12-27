@@ -1,0 +1,49 @@
+Main Branch Checklist
+Frontend Code:
+
+Ensure the app structure includes:
+src/
+App.jsx
+Dashboard.jsx
+Chat.jsx
+main.jsx
+Other required assets (e.g., index.html, styles, etc.)
+Check if the Socket.IO connection is correctly set to your backend:
+const socket = io('http://192.168.0.86:8000'); // Use port 8000 for backend
+Running the Frontend:
+
+Ensure that the frontend can be started with:
+npm run dev
+Verify that Vite is serving the frontend on http://localhost:5173.
+Backend Branch Checklist
+Backend Code:
+
+Ensure the app structure includes:
+app.py
+requirements.txt
+README.md
+Review the Flask application to ensure it has the necessary routes for handling:
+/voice_assistant (POST)
+/prompting_agent (POST)
+/agents (GET)
+Confirm that the Socket.IO server runs correctly and listens on port 8000.
+Running the Backend:
+
+Start the backend server using:
+python app.py
+Verify that the backend is accessible at http://localhost:8000.
+Wiring Instructions for Trae
+Frontend to Backend Connection:
+
+Ensure that when your frontend application fetches data from the backend, it uses the correct URL format:
+const response = await fetch('http://192.168.0.86:8000/endpoint');
+Testing Communication:
+
+Once both the frontend and backend are running, test a simple API call from the frontend to the backend to verify the connection.
+For example, use a button in the frontend that fetches agents:
+const getAgents = async () => {
+    const response = await fetch('http://192.168.0.86:8000/agents');
+    const data = await response.json();
+    console.log(data); // Log agents received from the backend
+};
+Configure Nginx or Reverse Proxy (Optional):
