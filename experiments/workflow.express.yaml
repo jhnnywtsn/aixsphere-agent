@@ -1,0 +1,46 @@
+version: 1
+name: projects-notes-express
+description: Same feature set, but swap the API layer to Express while keeping JSON storage and vanilla JS UI.
+
+inputs:
+  feature_spec: ./feature-spec.md
+
+steps:
+  - id: design
+    description: Reuse schema, API, and UI flow from the base workflow.
+    inputs: [feature_spec]
+    outputs: [schema.md, api.md, ui.md]
+
+  - id: scaffold
+    description: Initialize Node project with npm scripts, public assets, and Express server entrypoint.
+    depends_on: [design]
+    outputs:
+      - package.json
+      - public/index.html
+      - public/app.js
+      - server.js
+
+  - id: api
+    description: Implement auth + CRUD routes using Express and JSON file persistence.
+    depends_on: [scaffold]
+    outputs: [server.js, data/db.json]
+
+  - id: ui
+    description: Wire vanilla JS UI to the REST API for login and project/note CRUD.
+    depends_on: [api]
+    outputs: [public/index.html, public/app.js]
+
+  - id: tests
+    description: Cover auth, validation, and CRUD flows against the Express server with Node’s test runner.
+    depends_on: [api]
+    outputs: [test/api.test.js]
+
+  - id: ci
+    description: Provide npm scripts and CI checklist to run lint and test.
+    depends_on: [tests, ui]
+    outputs: [.github/workflows/ci.yml]
+
+validation:
+  commands:
+    - npm run lint
+    - npm test
