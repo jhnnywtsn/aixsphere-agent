@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects & Notes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem auto;
+        max-width: 800px;
+      }
+      form {
+        margin-bottom: 1rem;
+      }
+      .project {
+        border: 1px solid #ccc;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .notes {
+        margin-left: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Projects & Notes</h1>
+    <section id="auth">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <p id="auth-status"></p>
+    </section>
+
+    <section id="projects" style="display: none">
+      <h2>Projects</h2>
+      <form id="project-form">
+        <input type="text" id="project-title" placeholder="Title" required />
+        <input type="text" id="project-description" placeholder="Description" />
+        <button type="submit">Add Project</button>
+      </form>
+      <div id="project-list"></div>
+    </section>
+
+    <script src="/public/app.js"></script>
+  </body>
+</html>
